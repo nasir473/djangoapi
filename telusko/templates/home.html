@@ -1,0 +1,41 @@
+<h1>Hola {{name}}</h1>
+
+<h3> Adding two numbers</h3>
+<form action="add" method = 'post'>
+{% csrf_token %}
+    Enter 1st number : <input type="text" name="num1"><br>
+    Enter 2nd number : <input type="text" name="num2"><br>
+    <input type="submit">
+</form>
+
+<h3> Python Q1</h3>
+
+<form action="q1" method = 'post'>
+{% csrf_token %}
+    Enter the string : <input type="text" name="str1"><br>
+    <input type="submit">
+</form>
+
+<form action="travello">
+
+    <input type="submit" value="Travello">
+</form>
+
+<h3> DB Table View</h3>
+
+<!--
+<form action="restapi">
+
+    <input type="submit" value="DB Tables">
+</form> -->
+
+<form action="restapi" method = 'post'>
+{% csrf_token %}
+    Enter the Table Name : <input type="text" name="tab"><br>
+    <input type="submit">
+</form>
+
+<form action="table">
+
+    <input type="submit" value="TABLE">
+</form>

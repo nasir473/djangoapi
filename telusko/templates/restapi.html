@@ -1,0 +1,48 @@
+<h1> Replica of DB tables:</h1>
+<!--</h1><h4> {{db_data}}</h4>
+<h4> {{col}}</h4>  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>DB Table {{tab_name}}</h2>
+
+<table id="myTable">
+  <tr>
+    {% for col in col%}
+      {% for x in col%}
+        <th>{{x}}</th>
+      {% endfor %}
+    {% endfor %}
+  </tr>
+  {% for db_data in db_data%}
+  <tr>
+      {% for row in db_data%}
+        <td>{{row}}</td>
+      {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
