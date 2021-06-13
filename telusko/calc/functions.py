@@ -1,5 +1,5 @@
 def prime_c(upto):
-# to fetch the sum of n prime numbers
+    # to fetch the sum of n prime numbers
     sum = 0
 
     for num in range(1, upto + 1):
@@ -11,26 +11,28 @@ def prime_c(upto):
                 i = num
                 break;
 
-        #If the number is prime then add it.
+        # If the number is prime then add it.
         if i is not num:
             sum += num
     return sum
 
+
 def getSum(n):
-#to fetch sum of digits
+    # to fetch sum of digits
     sum = 0
     for digit in str(n):
-      sum += int(digit)
-    if sum>=10:
-        k=sum
-        sum=0
+        sum += int(digit)
+    if sum >= 10:
+        k = sum
+        sum = 0
         for digit in str(k):
             sum += int(digit)
-        if sum>=10:
-            j=sum
-            sum=0
+        if sum >= 10:
+            j = sum
+            sum = 0
             for digit in str(j):
                 sum += int(digit)
         return sum
     else:
         return sum
+

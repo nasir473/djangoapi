@@ -3,6 +3,8 @@ from django.shortcuts import render
 from.models import Destination,Masjid
 from django.http import HttpResponse
 from django.db import connection
+from . import functions
+import cv2
 
 
 # Create your views here.
@@ -52,6 +54,38 @@ def table(request):
     masjid  = Masjid.objects.all()
     return render(request, 'table.html',{'dests':dests,'masjid':masjid})
 
+def camera(request):
+    cam = cv2.VideoCapture(0)
+
+    cv2.namedWindow("test")
+
+    img_counter = 0
+
+    while True:
+        ret, frame = cam.read()
+        if not ret:
+            print("failed to grab frame")
+            break
+        cv2.imshow("test", frame)
+
+        k = cv2.waitKey(1)
+        if k % 256 == 27:
+            # ESC pressed
+            print("Escape hit, closing...")
+            break
+        elif k % 256 == 32:
+            # SPACE pressed
+            img_name = "opencv_frame_{}.png".format(img_counter)
+            cv2.imwrite(img_name, frame)
+            print("{} written!".format(img_name))
+            img_counter += 1
+
+    cam.release()
+
+    cv2.destroyAllWindows()
+
+    return render(request, 'home.html', {'name': 'Django'})
+
 def q1(request):
     strq1 = request.POST['str1']
     val = strq1
@@ -63,10 +97,10 @@ def q1(request):
 
     hun_m = [x * 100 for x in v_i]
 
-    map_object1 = map(prime_c, hun_m)
+    map_object1 = map(functions.prime_c, hun_m)
     sum_prime = list(map_object1)
 
-    map_object2 = map(getSum, sum_prime)
+    map_object2 = map(functions.getSum, sum_prime)
     digit_count = list(map_object2)
 
     s = val
@@ -89,40 +123,4 @@ def q1(request):
     return render(request, "q1.html", {'result': finalString})
 
 
-def prime_c(upto):
-    # to fetch the sum of n prime numbers
-    sum = 0
 
-    for num in range(1, upto + 1):
-
-        i = 1
-
-        for i in range(2, num):
-            if (int(num % i) == 0):
-                i = num
-                break;
-
-        # If the number is prime then add it.
-        if i is not num:
-            sum += num
-    return sum
-
-
-def getSum(n):
-    # to fetch sum of digits
-    sum = 0
-    for digit in str(n):
-        sum += int(digit)
-    if sum >= 10:
-        k = sum
-        sum = 0
-        for digit in str(k):
-            sum += int(digit)
-        if sum >= 10:
-            j = sum
-            sum = 0
-            for digit in str(j):
-                sum += int(digit)
-        return sum
-    else:
-        return sum
