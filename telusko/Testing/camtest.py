@@ -19,7 +19,7 @@ while True:
         print("Escape hit, closing...")
         break
     elif k%256 == 32:
-        # SPACE pressed
+        # SPACE pressed to capture
         img_name = "opencv_frame_{}.png".format(img_counter)
         cv2.imwrite(img_name, frame)
         print("{} written!".format(img_name))
