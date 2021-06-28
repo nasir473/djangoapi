@@ -11,6 +11,5 @@ urlpatterns = [
     path('restapi', views.restapi, name='restapi'),
     path('table/', views.table, name='table'),
     path('camera/', views.camera, name='camera'),
-    path('time/', views.time, name='time')
 ]
 
