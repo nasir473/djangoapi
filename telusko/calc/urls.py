@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import views,time
+from . import views
 
 urlpatterns = [
     path('',views.home,name='home'),
@@ -12,6 +12,5 @@ urlpatterns = [
     path('table/', views.table, name='table'),
     path('camera/', views.camera, name='camera'),
     path('time/', views.time, name='time')
-    #path('time/', time, name='time')
 ]
 
