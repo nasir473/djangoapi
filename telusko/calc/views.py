@@ -130,7 +130,7 @@ def time(request):
     print(time)
     return render(request, 'time.html',{'time':time})
 
-
+#getting time
 def get_time():
     html_text = requests.get("https://www.timeanddate.com/worldclock/india/visakhapatnam").text
 
