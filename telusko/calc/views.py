@@ -4,6 +4,8 @@ from.models import Destination,Masjid
 from django.http import HttpResponse
 from django.db import connection
 from . import functions
+import requests
+from bs4 import BeautifulSoup
 import cv2
 
 
@@ -123,4 +125,17 @@ def q1(request):
     return render(request, "q1.html", {'result': finalString})
 
 
+def time(request):
+    time = get_time()
+    print(time)
+    return render(request, 'time.html',{'time':time})
 
+
+def get_time():
+    html_text = requests.get("https://www.timeanddate.com/worldclock/india/visakhapatnam").text
+
+    soup = BeautifulSoup(html_text, 'lxml')
+    block = soup.find('section', class_='bk-focus')
+    divi = block.find('div', id='qlook', class_='bk-focus__qlook')
+    time = divi.find('span', id='ct', class_='h1').text
+    return time
